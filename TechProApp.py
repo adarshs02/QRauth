@@ -7,10 +7,26 @@ import os
 import subprocess
 import sys
 from pyzbar.pyzbar import decode
-from GUI_progs import center_window, text_display
 
 def quit_app():
     os._exit(0)
+
+def center_window(window):
+    window.update_idletasks()
+    width = window.winfo_width()
+    height = window.winfo_height()
+
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+
+    window.geometry(f"{width}x{height}+{x}+{y}")
+
+def text_display(window,text, xvalue, yvalue):
+    texttile = tk.Label(window,text="{}".format(text), font=('calibre', 17, 'normal'))
+    texttile.place(x=int(xvalue), y=int(yvalue))
 
 def log_in(serial_number):
     current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
